@@ -151,8 +151,10 @@ Other Changes:  None
 void printArr(int *arr){
 
     int size = findSize(arr);
+    printf("The length of the array: %d\n", size);
+
+    printf("These are the array values:\n");
     for(int n = 1; n<=size; n++){
-        printf("These are the array values:\n");
         printf("%d\n",*(arr+n));
     }
 
@@ -172,4 +174,20 @@ void deleteArr(int **arr){
     free(*arr);
     *arr = NULL;
     printf("Dynamic Array Deleted.");
+}
+
+/*************************************************
+Function: quickSortArray()
+Purpose:  Sort the Array using quicksort algorithm
+Input:    Pointer to the Dynamic Array
+Output:   No return value, just sorts the array
+
+Other Changes:  Just a sort.
+
+*************************************************/
+
+void quickSortArray(int *arr){
+
+
+    int size = findSize(arr);
 }
