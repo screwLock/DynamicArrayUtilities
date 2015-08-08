@@ -157,3 +157,19 @@ void printArr(int *arr){
     }
 
 }
+
+/*************************************************
+Function: deleteArr()
+Purpose:  Delete the array and free the memory
+Input:    Double Pointer to the dynamic array
+Output:   Return
+
+Other Changes:  Memory is freed.
+
+*************************************************/
+void deleteArr(int **arr){
+
+    free(*arr);
+    *arr = NULL;
+    printf("Dynamic Array Deleted.");
+}
