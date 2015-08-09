@@ -76,7 +76,8 @@ void printSize(int *arr){
 
 /*************************************************
 Function: appendArray()
-Purpose:  Appends an array to the end of the array.
+Purpose:  Appends one dynamic array to the end of
+          another dynamic array.
 Input:    Pointers to the 1)array being appended
                           2)array to be appended
 Output:   Returns 1 if successful, -1 if fail.
@@ -85,21 +86,31 @@ Other Changes:  None
 
 *************************************************/
 
-void appendArray(int *arr, int *data){
+int* appendArray(int *arr, int *data){
 
-    //Kill the bottom and use realloc() instead!!!!!
+    int sizeArr = findSize(arr);
+    int sizeData = findSize(data);
+    int *largerArr = realloc(arr, sizeArr+sizeData);
 
-    int size = findSize(arr);
-    int *newArr;
-    newArr = arr+size;
+    //check that realloc worked
+    if(largerArr == NULL){
+        fprintf(stderr, "Array cannot be appended.\n");
+        return -1;
+    }
 
-    //append the data
-//    for(int dataSize=findSizeArray(data)-1;
-//        dataSize>=0;dataSize--){
+    //make the old pointer point to memory
+    arr = largerArr;
 
-//        *(newArr+dataSize) = data[dataSize];
+    //adjust the size variable
+    *(arr)+=sizeData;
+    //size+=sizeData;
 
-//        }
+    //append the values
+    for(int i =0; i<=sizeData; i++){
+        *(arr+sizeArr+i) = *(data+i);
+    }
+
+    return arr;
 
 }
 
@@ -122,7 +133,7 @@ int* appendValue(int *arr, int value){
 
     //check that realloc worked
     if(largerArr == NULL){
-        fprintf(stderr, "Value cannot be appended.");
+        fprintf(stderr, "Value cannot be appended.\n");
         return -1;
     }
 
@@ -143,7 +154,8 @@ Function: printArr()
 Purpose:  Print the contents of the dynamic array
 Input:    Pointers to the dynamic array
 Output:   No return value.  Just a print-out
-          of the contents of the dynamic array.
+          of the contents of the dynamic array
+          and its length.
 
 Other Changes:  None
 
